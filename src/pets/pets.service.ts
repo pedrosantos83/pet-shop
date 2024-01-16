@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Pet } from './pet.schema';
@@ -10,12 +10,16 @@ export class PetsService {
 
   async create(createPetDto: CreatePetDto): Promise<Pet> {
     const createdPet = new this.petModel(createPetDto);
-    Logger.log('created:', createdPet);
+    // Logger.log('created:', createdPet);
     const result = await createdPet.save();
-    console.log(result.id);
-    return result.id as Pet;
+    return result;
   }
   async findAll(): Promise<Pet[]> {
-    return this.petModel.find().exec();
+    const results = await this.petModel
+      .find()
+      .populate('client')
+      .populate('appoitment');
+
+    return results;
   }
 }

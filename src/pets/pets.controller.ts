@@ -6,14 +6,12 @@ import { Pet } from './pet.schema';
 export class PetsController {
   constructor(private readonly petsService: PetsService) {}
   @Get()
-  //   getHello(): string {
-  //     return 'my pets';
-  //   }
   async findAll(): Promise<Pet[]> {
     return this.petsService.findAll();
   }
   @Post()
   async create(@Body() createPetDto: CreatePetDto) {
-    await this.petsService.create(createPetDto);
+    const generatedPet = await this.petsService.create(createPetDto);
+    return { pet: generatedPet };
   }
 }

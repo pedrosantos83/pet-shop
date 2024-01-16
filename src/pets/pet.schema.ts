@@ -1,5 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import mongoose, { HydratedDocument, ObjectId } from 'mongoose';
+import { Client } from 'src/clients/client.schema';
+import { Appoitment } from 'src/appoitment/appoitment.schema';
 
 export type PetDocument = HydratedDocument<Pet>;
 
@@ -12,7 +14,16 @@ export class Pet {
   age: number;
 
   @Prop()
-  breed: string;
+  type: string;
+
+  @Prop()
+  gender: string;
+
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Client' })
+  client: Client;
+
+  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'Appoitment' })
+  appoitment: Appoitment;
 }
 
 export const PetSchema = SchemaFactory.createForClass(Pet);
