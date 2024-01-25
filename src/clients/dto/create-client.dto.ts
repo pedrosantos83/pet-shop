@@ -3,4 +3,5 @@ export class CreateClientDto {
   readonly adress: string;
   readonly email: string;
   readonly phone: number;
+  readonly password: string;
 }

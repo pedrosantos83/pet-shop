@@ -6,7 +6,6 @@ import { PetsModule } from './pets/pets.module';
 import { ClientsModule } from './clients/clients.module';
 import { AppoitmentModule } from './appoitment/appoitment.module';
 import { AuthModule } from './auth/auth.module';
-import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -15,7 +14,6 @@ import { UsersModule } from './users/users.module';
     ClientsModule,
     AppoitmentModule,
     AuthModule,
-    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
